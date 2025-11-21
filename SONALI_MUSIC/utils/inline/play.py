@@ -1,6 +1,14 @@
+# ======================================================
+# ©️ 2025-26 All Rights Reserved by Revange 😎
+
+# 🧑‍💻 Developer : t.me/dmcatelegram
+# 🔗 Source link : https://github.com/hexamusic/REVANGEMUSIC
+# 📢 Telegram channel : t.me/dmcatelegram
+# =======================================================
+
 import math
 from config import SUPPORT_CHAT, OWNER_USERNAME
-from pyrogram.types import InlineKeyboardButton
+from pyrogram.types import InlineKeyboardButton, WebAppInfo
 from SONALI_MUSIC import app
 import config
 from SONALI_MUSIC.utils.formatters import time_to_seconds
@@ -31,13 +39,8 @@ def track_markup(_, videoid, user_id, channel, fplay):
 def stream_markup_timer(_, chat_id, played, dur):
     played_sec = time_to_seconds(played)
     duration_sec = time_to_seconds(dur)
-    if duration_sec == 0:
-        percentage = 0
-    else:
-        percentage = (played_sec / duration_sec) * 100
+    percentage = (played_sec / duration_sec) * 100
     umm = math.floor(percentage)
-
-    # Progress bar design
     if 0 < umm <= 10:
         bar = "◉—————————"
     elif 10 < umm < 20:
@@ -58,35 +61,28 @@ def stream_markup_timer(_, chat_id, played, dur):
         bar = "————————◉—"
     else:
         bar = "—————————◉"
-
-    # Buttons layout (photo-style clean design)
     buttons = [
         [
             InlineKeyboardButton(
-                text="<− 20s",
-                callback_data=f"SeekBackward|{chat_id}|20"
-            ),
-            InlineKeyboardButton(
-                text="• Promo •",
-                url="https://t.me/icxasta"
-            ),
-            InlineKeyboardButton(
-                text="20s +>",
-                callback_data=f"SeekForward|{chat_id}|20"
-            ),
-        ],
-        [
-            InlineKeyboardButton(
-                text=f"{played}  {bar}  {dur}",
-                callback_data="GetTimer"
+                text=f"{played} {bar} {dur}",
+                callback_data="GetTimer",
             )
         ],
         [
-            InlineKeyboardButton(
-                text="＋ ᴧDD ϻE Iɴ YσUR ɢRσUP ＋",
-                url=f"https://t.me/{app.username}?startgroup=true"
-            )
+            InlineKeyboardButton(text="▷", callback_data=f"ADMIN Resume|{chat_id}"),
+            InlineKeyboardButton(text="II", callback_data=f"ADMIN Pause|{chat_id}"),
+            InlineKeyboardButton(text="↻", callback_data=f"ADMIN Replay|{chat_id}"),
+            InlineKeyboardButton(text="‣‣I", callback_data=f"ADMIN Skip|{chat_id}"),
+            InlineKeyboardButton(text="▢", callback_data=f"ADMIN Stop|{chat_id}"),
         ],
+         [
+             InlineKeyboardButton(text="< - 𝟤𝟢 s", callback_data="seek_backward_20"),
+             InlineKeyboardButton(text="ᴄʜᴧᴛ", url=f"https://t.me/lll_BADNAM_BABY_lll"),
+             InlineKeyboardButton(text="𝟤𝟢 s + >", callback_data="seek_forward_20")
+         ],
+        [
+            InlineKeyboardButton(text="✙ ʌᴅᴅ ϻє ɪη ʏσυʀ ɢʀσυᴘ ✙", url=f"https://t.me/{app.username}?startgroup=true"),
+        ]
     ]
     return buttons
 
@@ -94,16 +90,23 @@ def stream_markup_timer(_, chat_id, played, dur):
 def stream_markup(_, chat_id):
     buttons = [
         [
-            InlineKeyboardButton(
-                text="＋ ᴧDD ϻE Iɴ YσUR ɢRσUP ＋",
-                url=f"https://t.me/{app.username}?startgroup=true"
-            )
+            InlineKeyboardButton(text="▷", callback_data=f"ADMIN Resume|{chat_id}"),
+            InlineKeyboardButton(text="II", callback_data=f"ADMIN Pause|{chat_id}"),
+            InlineKeyboardButton(text="↻", callback_data=f"ADMIN Replay|{chat_id}"),
+            InlineKeyboardButton(text="‣‣I", callback_data=f"ADMIN Skip|{chat_id}"),
+            InlineKeyboardButton(text="▢", callback_data=f"ADMIN Stop|{chat_id}"),
+         ],
+        [
+             InlineKeyboardButton(text="< - 𝟤𝟢 s", callback_data="seek_backward_20"),
+             InlineKeyboardButton(text="ᴄʜᴧᴛ", url=f"https://t.me/lll_BADNAM_BABY_lll"),
+             InlineKeyboardButton(text="𝟤𝟢 s+ >", callback_data="seek_forward_20")
+         ],
+        [
+            InlineKeyboardButton(text="✙ ʌᴅᴅ ϻє ɪη ʏσυʀ ɢʀσυᴘ ✙", url=f"https://t.me/{app.username}?startgroup=true"),
         ]
     ]
     return buttons
-
-
-def playlist_markup(_, videoid, user_id, ptype, channel, fplay):
+    def playlist_markup(_, videoid, user_id, ptype, channel, fplay):
     buttons = [
         [
             InlineKeyboardButton(
@@ -123,6 +126,8 @@ def playlist_markup(_, videoid, user_id, ptype, channel, fplay):
         ],
     ]
     return buttons
+                
+
 
 def livestream_markup(_, videoid, user_id, mode, channel, fplay):
     buttons = [
@@ -140,6 +145,8 @@ def livestream_markup(_, videoid, user_id, mode, channel, fplay):
         ],
     ]
     return buttons
+
+
 def slider_markup(_, videoid, user_id, query, query_type, channel, fplay):
     query = f"{query[:20]}"
     buttons = [
@@ -168,4 +175,13 @@ def slider_markup(_, videoid, user_id, query, query_type, channel, fplay):
             ),
         ],
     ]
-    return buttons    
+    return buttons
+
+# ======================================================
+# ©️ 2025-26 All Rights Reserved by Revange 😎
+
+# 🧑‍💻 Developer : t.me/dmcatelegram
+# 🔗 Source link : https://github.com/hexamusic/REVANGEMUSIC
+# 📢 Telegram channel : t.me/dmcatelegram
+# =======================================================
+    
